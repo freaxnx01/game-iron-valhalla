@@ -50,6 +50,10 @@ python3 -m http.server 8000
 # then visit http://localhost:8000/
 ```
 
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md).
+
 ## License
 
 No license file yet — all rights reserved by default. Ask if you'd like to reuse it.
