@@ -55,7 +55,7 @@ a{color:#35e0cf}a:hover{color:#8aeee2}
   <div data-screen-label="Game" style="display:flex;flex:1;gap:12px;padding:8px 12px 10px;min-height:0">
     <div ref="{{ zoneRef }}" style="flex:1;position:relative;display:flex;align-items:center;justify-content:center;min-width:0;min-height:0">
       <sc-if value="{{ battleOn }}" hint-placeholder-val="{{ false }}">
-        <div style="position:absolute;left:50%;top:4px;transform:translateX(-50%);z-index:5;background:rgba(13,18,26,.85);border:1px solid #2c3850;border-radius:20px;padding:7px 18px;font-size:11px;letter-spacing:2px;color:#e8b34b;font-weight:700;white-space:nowrap;animation:kfFadeIn .3s">{{ battleLabel }} — CLICK TO SKIP</div>
+        <div style="position:absolute;left:50%;top:4px;transform:translateX(-50%);z-index:5;background:rgba(13,18,26,.85);border:1px solid #2c3850;border-radius:20px;padding:7px 18px;font-size:11px;letter-spacing:2px;color:#e8b34b;font-weight:700;white-space:nowrap;animation:kfFadeIn .3s">{{ battleLabel }} — {{ clickToSkipShortLabel }}</div>
       </sc-if>
       <div style="{{ stageOuter }}">
         <div style="{{ stageInner }}">
@@ -81,23 +81,23 @@ a{color:#35e0cf}a:hover{color:#8aeee2}
     </div>
     <div data-screen-label="Sidebar" style="width:250px;flex:none;display:flex;flex-direction:column;gap:8px;min-height:0">
       <div style="background:#141a23;border:1px solid #26303f;border-radius:10px;padding:11px 14px">
-        <div style="font-family:'Russo One',sans-serif;font-size:9px;letter-spacing:2.5px;color:#e8b34b">BATTLE STATUS</div>
+        <div style="font-family:'Russo One',sans-serif;font-size:9px;letter-spacing:2.5px;color:#e8b34b">{{ battleStatusLabel }}</div>
         <div style="font-family:'Russo One',sans-serif;font-size:16px;letter-spacing:1px;margin-top:5px"><span style="color: {{ turnColor }}">{{ turnText }}</span></div>
         <div style="font-size:10px;color:#8b99ab;margin-top:3px;letter-spacing:1.2px">{{ turnSub }}</div>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
         <div onClick="{{ cycleTheme }}" style="grid-column:1 / -1;background:#1d2a3a;border:1px solid #354861;border-radius:8px;padding:9px 6px;font-size:10px;font-weight:700;letter-spacing:1.5px;color:#cfe0ef;cursor:pointer;text-align:center" style-hover="background: #263751; color: #ffffff">{{ themeLabel }}</div>
-        <div onClick="{{ hint }}" style="background:#14323a;border:1px solid #2a6b66;border-radius:8px;padding:9px 6px;font-size:10px;font-weight:700;letter-spacing:1.5px;color:#6fe6d8;cursor:pointer;text-align:center" style-hover="background: #1a4650; color: #a5f4ea">HINT</div>
-        <div onClick="{{ undo }}" style="background:#1b2431;border:1px solid #2e3a4c;border-radius:8px;padding:9px 6px;font-size:10px;font-weight:700;letter-spacing:1.5px;color:#aebccb;cursor:pointer;text-align:center" style-hover="background: #232f40; color: #e6eef7">UNDO MOVE</div>
+        <div onClick="{{ hint }}" style="background:#14323a;border:1px solid #2a6b66;border-radius:8px;padding:9px 6px;font-size:10px;font-weight:700;letter-spacing:1.5px;color:#6fe6d8;cursor:pointer;text-align:center" style-hover="background: #1a4650; color: #a5f4ea">{{ hintLabel }}</div>
+        <div onClick="{{ undo }}" style="background:#1b2431;border:1px solid #2e3a4c;border-radius:8px;padding:9px 6px;font-size:10px;font-weight:700;letter-spacing:1.5px;color:#aebccb;cursor:pointer;text-align:center" style-hover="background: #232f40; color: #e6eef7">{{ undoLabel }}</div>
         <div onClick="{{ toggleInstant }}" style="background:#1b2431;border:1px solid #2e3a4c;border-radius:8px;padding:9px 6px;font-size:10px;font-weight:700;letter-spacing:1.5px;color:#aebccb;cursor:pointer;text-align:center" style-hover="background: #232f40; color: #e6eef7">{{ instantLabel }}</div>
         <div onClick="{{ toggleSound }}" style="background:#1b2431;border:1px solid #2e3a4c;border-radius:8px;padding:9px 6px;font-size:10px;font-weight:700;letter-spacing:1.5px;color:#aebccb;cursor:pointer;text-align:center" style-hover="background: #232f40; color: #e6eef7">{{ soundLabel }}</div>
         <div onClick="{{ toggleViz }}" style="background:#241f33;border:1px solid #4a3f6b;border-radius:8px;padding:9px 6px;font-size:10px;font-weight:700;letter-spacing:1.5px;color:#b9a8e8;cursor:pointer;text-align:center" style-hover="background: #2e2745; color: #d8ccf5">{{ vizBtnLabel }}</div>
-        <div onClick="{{ newGame }}" style="background:#1b2431;border:1px solid #2e3a4c;border-radius:8px;padding:9px 6px;font-size:10px;font-weight:700;letter-spacing:1.5px;color:#aebccb;cursor:pointer;text-align:center" style-hover="background: #232f40; color: #e6eef7">NEW GAME</div>
+        <div onClick="{{ newGame }}" style="background:#1b2431;border:1px solid #2e3a4c;border-radius:8px;padding:9px 6px;font-size:10px;font-weight:700;letter-spacing:1.5px;color:#aebccb;cursor:pointer;text-align:center" style-hover="background: #232f40; color: #e6eef7">{{ newGameLabel }}</div>
       </div>
       <sc-if value="{{ aiViewOn }}" hint-placeholder-val="{{ false }}">
         <div style="background:#141a23;border:1px solid #26303f;border-radius:10px;padding:9px 14px 11px">
           <div style="display:flex;justify-content:space-between;align-items:baseline">
-            <div style="font-family:'Russo One',sans-serif;font-size:9px;letter-spacing:2.5px;color:#b9a8e8">SEARCH MONITOR</div>
+            <div style="font-family:'Russo One',sans-serif;font-size:9px;letter-spacing:2.5px;color:#b9a8e8">{{ searchMonitorLabel }}</div>
             <div style="font-size:9px;color:#55657a;letter-spacing:1px">NEGAMAX α·β</div>
           </div>
           <div style="font-size:9px;color:#8b99ab;margin-top:5px;letter-spacing:1px">{{ vizStats }}</div>
@@ -110,18 +110,18 @@ a{color:#35e0cf}a:hover{color:#8aeee2}
               </div>
             </sc-for>
           </div>
-          <div style="font-size:8px;color:#55657a;margin-top:5px;letter-spacing:1.2px">TEAL = EVALUATING · GOLD = BEST LINE</div>
+          <div style="font-size:8px;color:#55657a;margin-top:5px;letter-spacing:1.2px">{{ vizLegendLabel }}</div>
         </div>
       </sc-if>
       <div style="background:#141a23;border:1px solid #26303f;border-radius:10px;padding:9px 14px 11px">
-        <div style="font-family:'Russo One',sans-serif;font-size:9px;letter-spacing:2.5px;color:#e8b34b">SALVAGE YARD</div>
-        <div style="font-size:9px;letter-spacing:1.5px;color:#ff8a72;margin-top:6px;font-weight:700">ENEMY LOSSES</div>
+        <div style="font-family:'Russo One',sans-serif;font-size:9px;letter-spacing:2.5px;color:#e8b34b">{{ salvageYardLabel }}</div>
+        <div style="font-size:9px;letter-spacing:1.5px;color:#ff8a72;margin-top:6px;font-weight:700">{{ enemyLossesLabel }}</div>
         <div style="display:flex;flex-wrap:wrap;gap:2px;min-height:28px;align-items:flex-end;margin-top:2px"><sc-for list="{{ capB }}" as="c" hint-placeholder-count="2">{{ c }}</sc-for></div>
-        <div style="font-size:9px;letter-spacing:1.5px;color:#6fd3c8;margin-top:5px;font-weight:700">YOUR LOSSES</div>
+        <div style="font-size:9px;letter-spacing:1.5px;color:#6fd3c8;margin-top:5px;font-weight:700">{{ yourLossesLabel }}</div>
         <div style="display:flex;flex-wrap:wrap;gap:2px;min-height:28px;align-items:flex-end;margin-top:2px"><sc-for list="{{ capW }}" as="c" hint-placeholder-count="2">{{ c }}</sc-for></div>
       </div>
       <div style="background:#141a23;border:1px solid #26303f;border-radius:10px;padding:9px 14px;flex:1;min-height:0;display:flex;flex-direction:column">
-        <div style="font-family:'Russo One',sans-serif;font-size:9px;letter-spacing:2.5px;color:#e8b34b;flex:none">WAR LOG</div>
+        <div style="font-family:'Russo One',sans-serif;font-size:9px;letter-spacing:2.5px;color:#e8b34b;flex:none">{{ warLogLabel }}</div>
         <div ref="{{ logRef }}" style="flex:1;overflow-y:auto;margin-top:6px;min-height:0">
           <sc-for list="{{ moves }}" as="m" hint-placeholder-count="3">
             <div style="display:grid;grid-template-columns:26px 1fr 1fr;gap:5px;padding:2px 2px;font-size:12px">
@@ -138,7 +138,7 @@ a{color:#35e0cf}a:hover{color:#8aeee2}
   <sc-if value="{{ promoOn }}" hint-placeholder-val="{{ false }}">
     <div data-screen-label="Promotion" style="position:fixed;inset:0;background:rgba(5,8,13,.8);z-index:60;display:flex;align-items:center;justify-content:center;animation:kfFadeIn .2s">
       <div style="background:#151b26;border:1px solid #2c3850;border-radius:14px;padding:22px 26px;text-align:center;box-shadow:0 30px 70px rgba(0,0,0,.55)">
-        <div style="font-family:'Russo One',sans-serif;font-size:16px;letter-spacing:2px;color:#e8b34b">FIELD PROMOTION</div>
+        <div style="font-family:'Russo One',sans-serif;font-size:16px;letter-spacing:2px;color:#e8b34b">{{ fieldPromotionLabel }}</div>
         <div style="font-size:12px;color:#8b99ab;margin-top:5px">{{ promoSub }}</div>
         <div style="display:flex;gap:10px;margin-top:16px;justify-content:center">
           <sc-for list="{{ promoOpts }}" as="o" hint-placeholder-count="4">
@@ -156,7 +156,7 @@ a{color:#35e0cf}a:hover{color:#8aeee2}
       <div style="text-align:center;background:#151b26;border:1px solid #2c3850;border-radius:16px;padding:38px 56px;box-shadow:0 30px 80px rgba(0,0,0,.6)">
         <div style="font-family:'Russo One',sans-serif;font-size:44px;letter-spacing:4px"><span style="color: {{ resultColor }}">{{ resultTitle }}</span></div>
         <div style="font-size:13px;color:#8b99ab;margin-top:12px;letter-spacing:.5px;max-width:380px">{{ resultSub }}</div>
-        <div onClick="{{ newGame }}" style="margin-top:26px;display:inline-block;background:#35e0cf;color:#08191c;font-family:'Russo One',sans-serif;font-size:13px;letter-spacing:2px;padding:12px 30px;border-radius:8px;cursor:pointer" style-hover="background: #5ff0e0">NEW BATTLE</div>
+        <div onClick="{{ newGame }}" style="margin-top:26px;display:inline-block;background:#35e0cf;color:#08191c;font-family:'Russo One',sans-serif;font-size:13px;letter-spacing:2px;padding:12px 30px;border-radius:8px;cursor:pointer" style-hover="background: #5ff0e0">{{ newBattleLabel }}</div>
       </div>
     </div>
   </sc-if>
@@ -211,6 +211,51 @@ class Component extends DCLogic {
     wood:  { w:{nm:'WHITE',col:'#e2cfa8'}, b:{nm:'BLACK',col:'#c98f5f'} }
   };
   BCOL = { mech:{l:'#a9b5c3',d:'#57616f'}, viking:{l:'#a6ab99',d:'#585e4f'}, wood:{l:'#dcc093',d:'#8a6642'} };
+  STRINGS = {
+    en: {
+      battleStatus:'BATTLE STATUS', hint:'HINT', undoMove:'UNDO MOVE', newGame:'NEW GAME',
+      searchMonitor:'SEARCH MONITOR', salvageYard:'SALVAGE YARD', enemyLosses:'ENEMY LOSSES',
+      yourLosses:'YOUR LOSSES', warLog:'WAR LOG', vizLegend:'TEAL = EVALUATING · GOLD = BEST LINE',
+      themeMech:'THEME: MECH', themeViking:'THEME: VIKING', themeWood:'THEME: CLASSIC WOOD',
+      battlesInstant:'BATTLES: INSTANT', battlesCinema:'BATTLES: CINEMA',
+      soundOn:'SOUND: ON', soundOff:'SOUND: OFF', aiViewOn:'AI VIEW: ON', aiViewOff:'AI VIEW: OFF',
+      yourMove:'YOUR MOVE', combatEngaged:'COMBAT ENGAGED', computing:'COMPUTING',
+      fieldPromotion:'FIELD PROMOTION', campaignComplete:'CAMPAIGN COMPLETE',
+      clickToSkip:'CLICK ANYWHERE TO SKIP', calculatingVector:'CALCULATING ASSAULT VECTOR…',
+      selectUpgrade:'SELECT AN UPGRADE', kingUnderThreat:'WARNING — KING UNDER THREAT',
+      selectUnit:'SELECT A UNIT', awaitingTurn:'AWAITING ENEMY TURN…',
+      promoSub:'Your {piece} reached enemy lines. Choose its promotion.',
+      stalemate:'STALEMATE', victory:'VICTORY', defeat:'DEFEAT',
+      drawSub:'Both armies stand exhausted among the wreckage. The field is drawn.',
+      winSub:'The enemy warlord lies in ruin. The skalds will sing of this day.',
+      loseSub:'Your king has fallen. The enemy claims the field.',
+      newBattle:'NEW BATTLE', you:'YOU', cpu:'CPU', vs:'VS', clickToSkipShort:'CLICK TO SKIP',
+    },
+    de: {
+      battleStatus:'KAMPFSTATUS', hint:'TIPP', undoMove:'ZUG RÜCKGÄNGIG', newGame:'NEUES SPIEL',
+      searchMonitor:'SUCHMONITOR', salvageYard:'SCHROTTPLATZ', enemyLosses:'FEINDVERLUSTE',
+      yourLosses:'EIGENE VERLUSTE', warLog:'KRIEGSPROTOKOLL', vizLegend:'TÜRKIS = BEWERTUNG · GOLD = BESTE LINIE',
+      themeMech:'THEMA: MECH', themeViking:'THEMA: WIKINGER', themeWood:'THEMA: KLASSISCH HOLZ',
+      battlesInstant:'KÄMPFE: SOFORT', battlesCinema:'KÄMPFE: KINO',
+      soundOn:'TON: AN', soundOff:'TON: AUS', aiViewOn:'KI-ANSICHT: AN', aiViewOff:'KI-ANSICHT: AUS',
+      yourMove:'DEIN ZUG', combatEngaged:'KAMPF BEGONNEN', computing:'BERECHNET',
+      fieldPromotion:'BEFÖRDERUNG', campaignComplete:'FELDZUG BEENDET',
+      clickToSkip:'ÜBERALL KLICKEN ZUM ÜBERSPRINGEN', calculatingVector:'BERECHNE ANGRIFFSVEKTOR…',
+      selectUpgrade:'UPGRADE WÄHLEN', kingUnderThreat:'WARNUNG — KÖNIG BEDROHT',
+      selectUnit:'EINHEIT WÄHLEN', awaitingTurn:'WARTE AUF GEGNERZUG…',
+      promoSub:'Dein {piece} hat die feindlichen Linien erreicht. Wähle seine Beförderung.',
+      stalemate:'PATT', victory:'SIEG', defeat:'NIEDERLAGE',
+      drawSub:'Beide Armeen stehen erschöpft inmitten der Trümmer. Das Feld ist unentschieden.',
+      winSub:'Der feindliche Kriegsherr liegt in Trümmern. Die Skalden werden von diesem Tag singen.',
+      loseSub:'Dein König ist gefallen. Der Feind beansprucht das Feld.',
+      newBattle:'NEUE SCHLACHT', you:'DU', cpu:'KI', vs:'GEGEN', clickToSkipShort:'KLICKEN ZUM ÜBERSPRINGEN',
+    },
+  };
+  t(key, vars) {
+    var s = (this.STRINGS[window.GG_LANG] && this.STRINGS[window.GG_LANG][key]) || this.STRINGS.en[key] || key;
+    if (vars) for (var k in vars) s = s.replace('{' + k + '}', vars[k]);
+    return s;
+  }
   W = { p:70, n:86, b:84, r:88, q:92, k:96 };
   VAL = { p:100, n:310, b:330, r:500, q:900, k:0 };
   KN = [[1,2],[2,1],[2,-1],[1,-2],[-1,-2],[-2,-1],[-2,1],[-1,2]];
@@ -232,7 +277,7 @@ class Component extends DCLogic {
     const fit=Math.max(.3,Math.min(el.offsetWidth/955, el.offsetHeight/665, 1.9));
     if(Math.abs(fit-this.state.fit)>.01) this.setState({fit});
   };
-  componentDidMount(){ this.measure(); window.addEventListener('resize',this.measure); this.to(this.measure,50); }
+  componentDidMount(){ this.measure(); window.addEventListener('resize',this.measure); this.to(this.measure,50); window.addEventListener('gg-langchange', () => this.setState({})); }
   componentWillUnmount(){ this.clearT(); if(this.wd){clearInterval(this.wd); this.wd=null;} window.removeEventListener('resize',this.measure); }
   componentDidUpdate(){ const el=this.logRef.current; if(el) el.scrollTop=el.scrollHeight; }
 
@@ -444,7 +489,7 @@ class Component extends DCLogic {
     if(chk&&!mate) this.play('alarm');
     if(mate||stale){
       const win=mate&&g2.turn==='b';
-      this.to(()=>{ this.setState({over:{ title:stale?'STALEMATE':win?'VICTORY':'DEFEAT', color:stale?'#e8b34b':win?'#35e0cf':'#ff6a4d', sub:stale?'Both armies stand exhausted among the wreckage. The field is drawn.':win?'The enemy warlord lies in ruin. The skalds will sing of this day.':'Your king has fallen. The enemy claims the field.' }}); this.play(win?'win':stale?'horn':'lose'); },900);
+      this.to(()=>{ this.setState({over:{ title:stale?this.t('stalemate'):win?this.t('victory'):this.t('defeat'), color:stale?'#e8b34b':win?'#35e0cf':'#ff6a4d', sub:stale?this.t('drawSub'):win?this.t('winSub'):this.t('loseSub') }}); this.play(win?'win':stale?'horn':'lose'); },900);
       return;
     }
     if(g2.turn==='b'){ this.setState({thinking:true}); this.aiAt=Date.now(); this.to(this.aiGo,650); }
@@ -773,11 +818,11 @@ class Component extends DCLogic {
     const capIcon=(t,cc,i)=>h('div',{key:i,style:{width:24,display:'flex',justifyContent:'center'}},this.sprite(t,cc,21));
     const rows=[]; for(let i=0;i<s.log.length;i+=2) rows.push({n:String(i/2+1),w:s.log[i],b:s.log[i+1]||''});
     let turnText,turnColor,turnSub;
-    if(s.over){ turnText=s.over.title; turnColor=s.over.color; turnSub='CAMPAIGN COMPLETE'; }
-    else if(s.battle){ turnText='COMBAT ENGAGED'; turnColor='#e8b34b'; turnSub='CLICK ANYWHERE TO SKIP'; }
-    else if(s.thinking){ turnText=CL.b.nm+' COMPUTING'; turnColor=CL.b.col; turnSub='CALCULATING ASSAULT VECTOR…'; }
-    else if(s.promo){ turnText='FIELD PROMOTION'; turnColor='#e8b34b'; turnSub='SELECT AN UPGRADE'; }
-    else { turnText='YOUR MOVE'; turnColor='#35e0cf'; turnSub=s.checkSq>=0?'WARNING — KING UNDER THREAT':CL.w.nm+' — SELECT A UNIT'; }
+    if(s.over){ turnText=s.over.title; turnColor=s.over.color; turnSub=this.t('campaignComplete'); }
+    else if(s.battle){ turnText=this.t('combatEngaged'); turnColor='#e8b34b'; turnSub=this.t('clickToSkip'); }
+    else if(s.thinking){ turnText=CL.b.nm+' '+this.t('computing'); turnColor=CL.b.col; turnSub=this.t('calculatingVector'); }
+    else if(s.promo){ turnText=this.t('fieldPromotion'); turnColor='#e8b34b'; turnSub=this.t('selectUpgrade'); }
+    else { turnText=this.t('yourMove'); turnColor='#35e0cf'; turnSub=s.checkSq>=0?this.t('kingUnderThreat'):CL.w.nm+' — '+this.t('selectUnit'); }
     let vizEl=null;
     if(s.viz){
       const els=[];
@@ -796,28 +841,33 @@ class Component extends DCLogic {
     const b=s.battle, fit=s.fit;
     return {
       toggleViz:()=>this.setState(x=>({aiView:!x.aiView})),
-      vizBtnLabel:'AI VIEW: '+(s.aiView?'ON':'OFF'),
+      vizBtnLabel:s.aiView?this.t('aiViewOn'):this.t('aiViewOff'),
       aiViewOn:!!s.aiView,
-      vizStats:vizSrc?vizSrc.stats:'AWAITING ENEMY TURN…',
+      vizStats:vizSrc?vizSrc.stats:this.t('awaitingTurn'),
       vizRows:vizSrc?vizSrc.rows:[],
       vizEl,
       squares, moverEl, hovEl, logRef:this.logRef, zoneRef:this.zoneRef,
       stageOuter:{width:940*fit,height:660*fit,position:'relative',flex:'none'},
       stageInner:{position:'absolute',left:0,top:0,width:940,height:660,transform:'scale('+fit+')',transformOrigin:'0 0'},
       turnText, turnColor, turnSub,
-      youClan:CL.w.nm+' — YOU', cpuClan:CL.b.nm+' — CPU', youDot:CL.w.col, cpuDot:CL.b.col,
+      youClan:CL.w.nm+' — '+this.t('you'), cpuClan:CL.b.nm+' — '+this.t('cpu'), youDot:CL.w.col, cpuDot:CL.b.col,
       capB:s.capB.map((t,i)=>capIcon(t,'b',i)), capW:s.capW.map((t,i)=>capIcon(t,'w',i)),
       moves:rows,
       undo:()=>this.undoMove(), hint:()=>this.hintMove(),
       newGame:()=>{ this.clearT(); this.pend=null; this.setState(this.fresh()); this.play('horn'); },
-      toggleInstant:()=>this.setState(x=>({instant:!x.instant})), instantLabel:s.instant?'BATTLES: INSTANT':'BATTLES: CINEMA',
-      toggleSound:()=>this.setState(x=>({sound:!x.sound})), soundLabel:s.sound?'SOUND: ON':'SOUND: OFF',
+      toggleInstant:()=>this.setState(x=>({instant:!x.instant})), instantLabel:s.instant?this.t('battlesInstant'):this.t('battlesCinema'),
+      toggleSound:()=>this.setState(x=>({sound:!x.sound})), soundLabel:s.sound?this.t('soundOn'):this.t('soundOff'),
       cycleTheme:()=>{ const order=['mech','viking','wood']; const nx=order[(order.indexOf(th)+1)%3]; this.setState({theme:nx}); this.play('select'); },
-      themeLabel:'THEME: '+(th==='mech'?'MECH':th==='viking'?'VIKING':'CLASSIC WOOD'),
+      themeLabel:th==='mech'?this.t('themeMech'):th==='viking'?this.t('themeViking'):this.t('themeWood'),
+      battleStatusLabel:this.t('battleStatus'), hintLabel:this.t('hint'), undoLabel:this.t('undoMove'),
+      newGameLabel:this.t('newGame'), searchMonitorLabel:this.t('searchMonitor'), vizLegendLabel:this.t('vizLegend'),
+      salvageYardLabel:this.t('salvageYard'), enemyLossesLabel:this.t('enemyLosses'), yourLossesLabel:this.t('yourLosses'),
+      warLogLabel:this.t('warLog'), fieldPromotionLabel:this.t('fieldPromotion'), newBattleLabel:this.t('newBattle'),
+      clickToSkipShortLabel:this.t('clickToSkipShort'),
       battleOn:!!b, skipBattle:()=>this.endBattle(),
-      battleLabel:b?(CL[b.atk.c].nm+' '+NM[b.atk.t]+'  VS  '+CL[b.def.c].nm+' '+NM[b.def.t]):'',
+      battleLabel:b?(CL[b.atk.c].nm+' '+NM[b.atk.t]+'  '+this.t('vs')+'  '+CL[b.def.c].nm+' '+NM[b.def.t]):'',
       battleBoardEl:b?this.battleBoard(b):null,
-      promoOn:!!s.promo, promoSub:'Your '+NM.p+' reached enemy lines. Choose its promotion.',
+      promoOn:!!s.promo, promoSub:this.t('promoSub',{piece:NM.p}),
       promoOpts:s.promo?['q','r','b','n'].map(t=>({pick:()=>this.promoPick(t),icon:this.sprite(t,'w',44),name:NM[t]})):[],
       overOn:!!s.over,
       resultTitle:s.over?s.over.title:'', resultColor:s.over?s.over.color:'#fff', resultSub:s.over?s.over.sub:''
