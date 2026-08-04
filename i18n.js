@@ -21,9 +21,33 @@
     window.dispatchEvent(new CustomEvent("gg-langchange", { detail: { lang: lang } }));
   };
 
+  // Delegated on `document`, not on the button itself: some games' #game-nav
+  // is managed by a UI framework (e.g. a dc-tool-bundled game whose runtime
+  // mounts a React root over it) that periodically recreates its DOM
+  // subtree from the framework's own tracked template — silently dropping
+  // any listener attached directly to a child node (and stripping raw
+  // `onclick="..."` attributes, since a framework like React expects a
+  // function-valued prop, not a string). A listener on `document` is
+  // outside that subtree, so it survives regardless of how often the
+  // button node underneath it gets replaced; it just re-checks
+  // `event.target` on every click.
+  document.addEventListener("click", function (e) {
+    var btn = e.target.closest && e.target.closest("#gg-lang-toggle");
+    if (btn) window.ggSetLang(window.GG_LANG === "en" ? "de" : "en");
+  });
+
   function injectToggle() {
+    // A pre-existing button (e.g. static markup inside a framework-managed
+    // #game-nav, added by hand for a game where auto-injection wouldn't
+    // survive re-renders) is left alone — the delegated listener above
+    // already covers clicks on it. Its label should be a static "EN/DE"
+    // rather than a dynamically-updated current-language indicator, for
+    // the same reason: a framework-owned node can lose a JS-driven text
+    // update on its next re-render.
+    if (document.getElementById("gg-lang-toggle")) return;
+
     var nav = document.getElementById("game-nav");
-    if (!nav || document.getElementById("gg-lang-toggle")) return;
+    if (!nav) return;
 
     var sep = document.createElement("span");
     sep.setAttribute("aria-hidden", "true");
@@ -38,12 +62,9 @@
       "background:none;border:none;padding:0;margin:0;font:inherit;color:#8fd8e8;cursor:pointer";
     btn.textContent = window.GG_LANG.toUpperCase();
 
-    btn.addEventListener("click", function () {
-      window.ggSetLang(window.GG_LANG === "en" ? "de" : "en");
-    });
-
     window.addEventListener("gg-langchange", function (e) {
-      btn.textContent = e.detail.lang.toUpperCase();
+      var b = document.getElementById("gg-lang-toggle");
+      if (b) b.textContent = e.detail.lang.toUpperCase();
     });
 
     nav.appendChild(sep);
