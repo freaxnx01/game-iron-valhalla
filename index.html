@@ -180,15 +180,23 @@ a{color:#35e0cf}a:hover{color:#8aeee2}
   <button id="gg-lang-toggle" type="button" title="Switch language" style="background:none;border:none;padding:0;margin:0;font:inherit;color:#8fd8e8;cursor:pointer">EN/DE</button>
 </nav>
 <script>
+  // Version badge → CHANGELOG. Text comes only from window.GAME_VERSION so
+  // version.js stays the single source. The dc runtime re-renders #game-nav
+  // from its template (an empty span) after load and on every state change,
+  // so the link is put back whenever it is missing.
   (function () {
-    var el = document.getElementById('version-badge');
-    if (!el) return;
-    var a = document.createElement('a');
-    a.href = 'https://github.com/freaxnx01/game-iron-valhalla/blob/main/CHANGELOG.md';
-    a.target = '_blank'; a.rel = 'noopener'; a.title = 'Changelog';
-    a.textContent = 'v' + (window.GAME_VERSION || '0.0.0');
-    a.style.color = 'inherit'; a.style.textDecoration = 'none';
-    el.appendChild(a);
+    function ensure() {
+      var el = document.getElementById('version-badge');
+      if (!el || el.querySelector('a')) return;
+      var a = document.createElement('a');
+      a.href = 'https://github.com/freaxnx01/game-iron-valhalla/blob/main/CHANGELOG.md';
+      a.target = '_blank'; a.rel = 'noopener'; a.title = 'Changelog';
+      a.textContent = 'v' + (window.GAME_VERSION || '0.0.0');
+      a.style.color = 'inherit'; a.style.textDecoration = 'none';
+      el.appendChild(a);
+    }
+    ensure();
+    new MutationObserver(ensure).observe(document.documentElement, { childList: true, subtree: true });
   })();
 </script>
 <script async defer crossorigin="anonymous" src="https://buttons.github.io/buttons.js"></script>

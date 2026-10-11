@@ -9,6 +9,9 @@ All notable changes to this project are documented here, following
 ### Added
 - Hover over the version number to see when the game was last updated, in your own time zone, and how long ago
 
+### Fixed
+- The version number in the game navigation was empty: the page re-rendered the navigation shortly after loading and dropped it. It is shown again and links to the changelog
+
 ## [0.2.0] - 2026-09-29
 
 ### Added
